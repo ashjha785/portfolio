@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashutosh Kumar | Finance & Data Analyst</title>
+    <title>Ashutosh Kumar | Finance & Data Analyst | Open to Join Immediately</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -21,17 +22,27 @@
                         'vention-black': '#050505',
                         'vention-gray': '#1A1A1A',
                         'vention-line': '#333333',
-                        'vention-accent': '#3B82F6', // Electric Blue
+                        'vention-accent': '#3B82F6',
                         'vention-text': '#E5E7EB',
                         'vention-muted': '#9CA3AF',
                     },
                     animation: {
                         'marquee': 'marquee 30s linear infinite',
+                        'float': 'float 6s ease-in-out infinite',
+                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'draw': 'draw 2s ease-out forwards',
                     },
                     keyframes: {
                         marquee: {
                             '0%': { transform: 'translateX(0%)' },
                             '100%': { transform: 'translateX(-100%)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0px)' },
+                            '50%': { transform: 'translateY(-20px)' },
+                        },
+                        draw: {
+                            'to': { strokeDashoffset: '0' }
                         }
                     }
                 }
@@ -48,11 +59,13 @@
         }
         ::-webkit-scrollbar-thumb {
             background: #333; 
+            border-radius: 4px;
         }
         ::-webkit-scrollbar-thumb:hover {
             background: #555; 
         }
         
+        /* Grid Background */
         .grid-bg {
             background-image: linear-gradient(to right, #1a1a1a 1px, transparent 1px),
                               linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
@@ -63,19 +76,75 @@
             background-color: #E5E7EB;
             color: #050505;
         }
+
+        .stock-line {
+            stroke-dasharray: 1000;
+            stroke-dashoffset: 1000;
+            animation: draw 3s ease-out forwards;
+        }
+
+        .counter {
+            display: inline-block;
+        }
+
+        .glow {
+            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
+        }
+
+        .card-3d {
+            transform-style: preserve-3d;
+            transition: transform 0.3s ease;
+        }
+
+        .card-3d:hover {
+            transform: perspective(1000px) rotateY(5deg) rotateX(5deg);
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: #3B82F6;
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+        }
+
+        @keyframes particleFloat {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-100px) scale(0); }
+        }
+
+        .skill-bar {
+            transition: width 1.5s ease-out;
+        }
+
+        .typing-cursor {
+            animation: blink 1s infinite;
+        }
+
+        @keyframes blink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
     </style>
 </head>
-<body class="bg-vention-black text-vention-text font-sans selection:bg-vention-accent selection:text-white overflow-x-hidden">
+<body class="bg-vention-black text-vention-text font-sans selection:bg-vention-accent selection:text-white overflow-x-hidden antialiased">
+
+    <!-- Floating Particles Container -->
+    <div id="particles" class="fixed inset-0 pointer-events-none z-0"></div>
 
     <!-- Navigation / Top Bar -->
-    <nav class="fixed top-0 w-full z-50 bg-vention-black/90 backdrop-blur-sm border-b border-vention-line flex justify-between items-center px-4 md:px-8 h-14 text-xs font-mono uppercase tracking-wider">
+    <nav class="fixed top-0 w-full z-50 bg-vention-black/95 backdrop-blur-md border-b border-vention-line flex justify-between items-center px-4 md:px-8 h-14 text-xs font-mono uppercase tracking-wider">
         <div class="flex items-center gap-2">
             <div class="w-2 h-2 bg-vention-accent rounded-full animate-pulse"></div>
             <span>Ashutosh Kumar</span>
         </div>
-        <div class="hidden md:flex gap-8 text-vention-muted">
+        <div class="hidden md:flex gap-8 text-vention-muted items-center">
             <span>Finance Associate</span>
             <span>Delhi, IN</span>
+            <!-- Live Clock -->
+            <span id="live-clock" class="text-vention-accent">--:--:--</span>
         </div>
         <div class="flex gap-6">
             <a href="#overview" class="hover:text-vention-accent transition-colors">01. Profile</a>
@@ -93,13 +162,26 @@
                 25
             </div>
 
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16">
+            <!-- Animated Stock Graph Background -->
+            <div class="absolute top-32 right-8 md:right-24 w-64 md:w-96 h-48 opacity-30 pointer-events-none">
+                <svg viewBox="0 0 400 200" class="w-full h-full">
+                    <defs>
+                        <linearGradient id="stockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.3" />
+                            <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0" />
+                        </linearGradient>
+                    </defs>
+                    <path id="stockArea" fill="url(#stockGradient)" d="M0,200 L0,200 L400,200 Z" />
+                    <path id="stockLine" class="stock-line" fill="none" stroke="#3B82F6" stroke-width="2" d="M0,150 Q50,120 100,130 T200,80 T300,100 T400,40" />
+                    <circle class="animate-pulse" cx="400" cy="40" r="4" fill="#3B82F6" />
+                </svg>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16 relative z-10">
                 <div class="col-span-1 md:col-span-8">
                     <p class="font-mono text-vention-accent mb-4 tracking-widest uppercase text-sm">Professional Portfolio</p>
-                    <h1 class="text-6xl md:text-8xl lg:text-9xl font-mono font-medium tracking-tighter leading-[0.9] mb-8">
-                        FINANCE<br>
-                        MEETS<br>
-                        DATA SCIENCE.
+                    <h1 class="text-6xl md:text-8xl lg:text-9xl font-mono font-medium tracking-tighter leading-[0.9] mb-8 min-h-[1.8em]">
+                        <span id="typing-text"></span><span class="typing-cursor text-vention-accent">|</span>
                     </h1>
                 </div>
                 <div class="col-span-1 md:col-span-4 flex flex-col justify-end pb-2">
@@ -120,7 +202,7 @@
             </div>
 
             <!-- Ticker Tape -->
-            <div class="w-full border-t border-vention-line py-4 overflow-hidden absolute bottom-0 left-0 bg-vention-black">
+            <div class="w-full border-t border-vention-line py-4 overflow-hidden absolute bottom-0 left-0 bg-vention-black z-20">
                 <div class="whitespace-nowrap animate-marquee font-mono text-sm text-vention-muted uppercase tracking-widest">
                     <span class="mx-4 text-vention-accent">Financial Modeling</span> • <span class="mx-4">Google Data Analytics</span> • <span class="mx-4">Tableau</span> • <span class="mx-4">SQL</span> • <span class="mx-4">R Programming</span> • <span class="mx-4">Variance Analysis</span> • <span class="mx-4">Interactive Dashboards</span> • <span class="mx-4">Advanced Excel (VLOOKUP/Index-Match)</span> • <span class="mx-4">Ratio Analysis</span> • <span class="mx-4">Forecasting</span>
                 </div>
@@ -129,12 +211,12 @@
     </header>
 
     <!-- 01. Market Overview / About -->
-    <section id="overview" class="border-b border-vention-line">
+    <section id="overview" class="border-b border-vention-line bg-vention-black">
         <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-12 min-h-[500px]">
+            <div class="grid grid-cols-1 md:grid-cols-12 min-h-fit">
                 
                 <!-- Sticky Sidebar -->
-                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit">
+                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit bg-vention-black z-10">
                     <span class="text-vention-accent font-mono text-xl font-bold block mb-2">01.</span>
                     <h2 class="text-2xl font-mono font-medium">Core Capabilities</h2>
                     <p class="text-vention-muted text-sm mt-4">Key performance metrics and technical proficiency.</p>
@@ -145,16 +227,16 @@
                     <!-- Abstract -->
                     <div class="p-6 md:p-12 border-b border-vention-line">
                         <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                            <div>
-                                <span class="block text-4xl font-mono text-vention-accent mb-1">250+</span>
+                            <div class="counter-container" data-target="250">
+                                <span class="block text-4xl font-mono text-vention-accent mb-1"><span class="counter">0</span>+</span>
                                 <span class="text-xs uppercase tracking-wider text-vention-muted">Financial Models</span>
                             </div>
-                            <div>
-                                <span class="block text-4xl font-mono text-vention-accent mb-1">95%</span>
+                            <div class="counter-container" data-target="95">
+                                <span class="block text-4xl font-mono text-vention-accent mb-1"><span class="counter">0</span>%</span>
                                 <span class="text-xs uppercase tracking-wider text-vention-muted">Data Precision</span>
                             </div>
-                            <div>
-                                <span class="block text-4xl font-mono text-vention-accent mb-1">20+</span>
+                            <div class="counter-container" data-target="20">
+                                <span class="block text-4xl font-mono text-vention-accent mb-1"><span class="counter">0</span>+</span>
                                 <span class="text-xs uppercase tracking-wider text-vention-muted">Dashboards</span>
                             </div>
                             <div>
@@ -164,10 +246,49 @@
                         </div>
                     </div>
 
+                    <!-- Skills Progress Bars -->
+                    <div class="p-6 md:p-12 border-b border-vention-line">
+                        <h3 class="font-mono text-lg mb-6">Technical Proficiency</h3>
+                        <div class="space-y-4">
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-vention-muted">Excel / Financial Modeling</span>
+                                </div>
+                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full bg-gradient-to-r from-vention-accent to-blue-400 rounded-full" style="width: 0%" data-width="95%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-vention-muted">SQL & Database Management</span>
+                                </div>
+                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full bg-gradient-to-r from-purple-500 to-purple-400 rounded-full" style="width: 0%" data-width="88%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-vention-muted">Tableau & Data Visualization</span>
+                                </div>
+                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full" style="width: 0%" data-width="90%"></div>
+                                </div>
+                            </div>
+                            <div class="skill-item">
+                                <div class="flex justify-between mb-1">
+                                    <span class="text-sm text-vention-muted">Python</span>
+                                </div>
+                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
+                                    <div class="skill-bar h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full" style="width: 0%" data-width="75%"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
                     <!-- Tech Stack Grid -->
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
                         <!-- Item 1 -->
-                        <div class="p-8 border-b sm:border-r border-vention-line hover:bg-vention-gray transition-colors group">
+                        <div class="p-8 border-b sm:border-r border-vention-line hover:bg-vention-gray transition-colors group card-3d">
                             <div class="w-10 h-10 mb-4 rounded-full border border-vention-line flex items-center justify-center text-vention-muted group-hover:border-vention-accent group-hover:text-vention-accent transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
                             </div>
@@ -176,7 +297,7 @@
                         </div>
                         
                         <!-- Item 2 -->
-                        <div class="p-8 border-b lg:border-r border-vention-line hover:bg-vention-gray transition-colors group">
+                        <div class="p-8 border-b lg:border-r border-vention-line hover:bg-vention-gray transition-colors group card-3d">
                              <div class="w-10 h-10 mb-4 rounded-full border border-vention-line flex items-center justify-center text-vention-muted group-hover:border-vention-accent group-hover:text-vention-accent transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
                             </div>
@@ -185,7 +306,7 @@
                         </div>
 
                         <!-- Item 3 -->
-                        <div class="p-8 border-b border-vention-line hover:bg-vention-gray transition-colors group">
+                        <div class="p-8 border-b border-vention-line hover:bg-vention-gray transition-colors group card-3d">
                              <div class="w-10 h-10 mb-4 rounded-full border border-vention-line flex items-center justify-center text-vention-muted group-hover:border-vention-accent group-hover:text-vention-accent transition-colors">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
                             </div>
@@ -201,23 +322,50 @@
     <!-- 02. Professional Experience (Timeline) -->
     <section id="experience" class="border-b border-vention-line bg-vention-black">
         <div class="max-w-7xl mx-auto">
-             <div class="grid grid-cols-1 md:grid-cols-12">
+             <div class="grid grid-cols-1 md:grid-cols-12 min-h-fit">
                 
-                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit">
+                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit bg-vention-black z-10">
                     <span class="text-vention-accent font-mono text-xl font-bold block mb-2">02.</span>
                     <h2 class="text-2xl font-mono font-medium">Timeline</h2>
                     <p class="text-vention-muted text-sm mt-4">Professional history and academic credentials.</p>
+                    
+                    <!-- Animated Timeline Indicator -->
+                    <div class="mt-8 relative hidden md:block">
+                        <div class="absolute left-2 top-0 bottom-0 w-0.5 bg-vention-line"></div>
+                        <div class="absolute left-2 top-0 w-0.5 bg-vention-accent timeline-progress" style="height: 0%"></div>
+                        <div class="space-y-4 pl-8">
+                            <div class="relative">
+                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-accent"></div>
+                                <span class="text-xs text-vention-muted">Present</span>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-line"></div>
+                                <span class="text-xs text-vention-muted">2023</span>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-line"></div>
+                                <span class="text-xs text-vention-muted">2021</span>
+                            </div>
+                            <div class="relative">
+                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-line"></div>
+                                <span class="text-xs text-vention-muted">2018</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-span-1 md:col-span-9">
                     <!-- Exp 1 -->
-                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors">
+                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors timeline-item">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
                             <div>
                                 <h3 class="text-2xl font-mono font-medium text-white">Finance Associate Trainee</h3>
                                 <p class="text-vention-accent font-mono text-sm mt-1">Invact Metaversity</p>
                             </div>
-                            <span class="text-vention-muted font-mono text-xs border border-vention-line px-2 py-1 rounded mt-2 md:mt-0">2023 - Present</span>
+                            <span class="text-vention-muted font-mono text-xs border border-vention-line px-2 py-1 rounded mt-2 md:mt-0 flex items-center gap-2">
+                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+                                2023 - Present
+                            </span>
                         </div>
                         <ul class="text-vention-muted text-sm list-disc list-inside space-y-2 max-w-2xl">
                             <li>Created 250+ financial models covering capital, loan structures, fixed assets, and depreciation.</li>
@@ -227,13 +375,16 @@
                     </div>
 
                     <!-- Edu 1 -->
-                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors">
+                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors timeline-item">
                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
                             <div>
                                 <h3 class="text-xl font-mono font-medium text-white">Google Data Analytics Certification</h3>
                                 <p class="text-vention-accent font-mono text-sm mt-1">Coursera / Google</p>
                             </div>
-                            <span class="text-vention-muted font-mono text-xs border border-vention-line px-2 py-1 rounded mt-2 md:mt-0">Certification</span>
+                            <span class="text-vention-muted font-mono text-xs border border-vention-line px-2 py-1 rounded mt-2 md:mt-0 flex items-center gap-2">
+                                <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
+                                Certified
+                            </span>
                         </div>
                         <p class="text-vention-muted text-sm max-w-2xl">
                             Comprehensive training in data cleaning, SQL, R programming, and Tableau visualization. Focused on handling large financial datasets.
@@ -241,7 +392,7 @@
                     </div>
 
                     <!-- Edu 2 -->
-                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors">
+                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors timeline-item">
                          <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
                             <div>
                                 <h3 class="text-xl font-mono font-medium text-white">BBA (General)</h3>
@@ -261,12 +412,24 @@
     <!-- 03. Portfolio Projects -->
     <section id="work" class="border-b border-vention-line bg-vention-black">
         <div class="max-w-7xl mx-auto">
-             <div class="grid grid-cols-1 md:grid-cols-12">
+             <div class="grid grid-cols-1 md:grid-cols-12 min-h-fit">
                 
-                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit">
+                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit bg-vention-black z-10">
                     <span class="text-vention-accent font-mono text-xl font-bold block mb-2">03.</span>
                     <h2 class="text-2xl font-mono font-medium">Key Projects</h2>
                     <p class="text-vention-muted text-sm mt-4">Selected works demonstrating modeling and analytics.</p>
+                    
+                    <!-- Project Stats -->
+                    <div class="mt-8 space-y-4">
+                        <div class="flex items-center justify-between p-3 border border-vention-line rounded-lg hover:border-vention-accent transition-colors">
+                            <span class="text-xs text-vention-muted">Total Projects</span>
+                            <span class="text-lg font-mono text-vention-accent">12</span>
+                        </div>
+                        <div class="flex items-center justify-between p-3 border border-vention-line rounded-lg hover:border-vention-accent transition-colors">
+                            <span class="text-xs text-vention-muted">Success Rate</span>
+                            <span class="text-lg font-mono text-green-400">98%</span>
+                        </div>
+                    </div>
                 </div>
 
                 <div class="col-span-1 md:col-span-9">
@@ -279,14 +442,14 @@
                     </div>
 
                     <!-- Project 1 -->
-                    <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300">
+                    <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300 project-card">
                         <div class="grid grid-cols-1 md:grid-cols-12 p-6 md:px-8 md:py-8 items-center gap-4 md:gap-0">
                             <div class="col-span-6">
                                 <h3 class="text-2xl md:text-3xl font-mono font-medium group-hover:translate-x-2 transition-transform">Corporate Valuation Model</h3>
                                 <p class="md:hidden text-sm text-vention-muted mt-1">Forecasting & Analysis</p>
                             </div>
                             <div class="col-span-4 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+                                <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
                                 <span class="text-sm font-mono">Financial Modeling</span>
                             </div>
                             <div class="col-span-2 text-right font-mono text-sm text-vention-muted group-hover:text-black">Excel / VLOOKUP</div>
@@ -297,14 +460,14 @@
                     </a>
 
                     <!-- Project 2 -->
-                    <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300">
+                    <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300 project-card">
                         <div class="grid grid-cols-1 md:grid-cols-12 p-6 md:px-8 md:py-8 items-center gap-4 md:gap-0">
                             <div class="col-span-6">
                                 <h3 class="text-2xl md:text-3xl font-mono font-medium group-hover:translate-x-2 transition-transform">Real-time Sales Dashboard</h3>
                                 <p class="md:hidden text-sm text-vention-muted mt-1">Interactive Reporting</p>
                             </div>
                             <div class="col-span-4 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500"></span>
+                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
                                 <span class="text-sm font-mono">Analytics</span>
                             </div>
                             <div class="col-span-2 text-right font-mono text-sm text-vention-muted group-hover:text-black">Pivot Charts / Tableau</div>
@@ -315,14 +478,14 @@
                     </a>
 
                      <!-- Project 3 -->
-                     <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300">
+                     <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300 project-card">
                         <div class="grid grid-cols-1 md:grid-cols-12 p-6 md:px-8 md:py-8 items-center gap-4 md:gap-0">
                             <div class="col-span-6">
                                 <h3 class="text-2xl md:text-3xl font-mono font-medium group-hover:translate-x-2 transition-transform">Dataset Optimization Engine</h3>
                                 <p class="md:hidden text-sm text-vention-muted mt-1">Data Engineering</p>
                             </div>
                             <div class="col-span-4 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+                                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
                                 <span class="text-sm font-mono">Automation</span>
                             </div>
                             <div class="col-span-2 text-right font-mono text-sm text-vention-muted group-hover:text-black">SQL / Advanced Excel</div>
@@ -340,6 +503,11 @@
     <!-- 04. Connect / Footer -->
     <section id="contact" class="relative py-20 md:py-32 overflow-hidden">
         <div class="absolute inset-0 grid-bg opacity-50 pointer-events-none"></div>
+        
+        <!-- Animated Background Orbs -->
+        <div class="absolute top-20 left-20 w-64 h-64 bg-vention-accent/10 rounded-full blur-3xl animate-pulse-slow"></div>
+        <div class="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
+        
         <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
             
             <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
@@ -351,7 +519,7 @@
                     </p>
                     
                     <div class="flex flex-col sm:flex-row gap-4">
-                         <a href="mailto:ashjha785@gmail.com" class="inline-flex h-14 items-center justify-center rounded-full bg-vention-accent px-10 font-medium text-white transition-transform hover:scale-105">
+                         <a href="mailto:ashjha785@gmail.com" class="inline-flex h-14 items-center justify-center rounded-full bg-vention-accent px-10 font-medium text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-vention-accent/30">
                             ashjha785@gmail.com
                         </a>
                         <a href="tel:7717742551" class="inline-flex h-14 items-center justify-center rounded-full border border-vention-line px-10 font-medium text-white transition-colors hover:bg-white hover:text-black">
@@ -365,8 +533,8 @@
                         <div>
                             <h4 class="text-vention-muted uppercase tracking-widest mb-4">Socials</h4>
                             <ul class="space-y-2">
-                                <li><a href="https://www.linkedin.com/in/ashut0shkumar" target="_blank" class="hover:text-vention-accent transition-colors">LinkedIn ↗</a></li>
-                                <li><a href="#" class="hover:text-vention-accent transition-colors">Download Resume ⬇</a></li>
+                                <li><a href="https://www.linkedin.com/in/ashut0shkumar" target="_blank" class="hover:text-vention-accent transition-colors inline-flex items-center gap-2 group">LinkedIn <span class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span></a></li>
+                                <li><a href="#" class="hover:text-vention-accent transition-colors inline-flex items-center gap-2 group">Download Resume <span class="group-hover:translate-y-1 transition-transform">⬇</span></a></li>
                             </ul>
                         </div>
                         <div>
@@ -385,8 +553,150 @@
 
     <!-- Mobile Visual Detail -->
     <div class="md:hidden border-t border-vention-line py-6 text-center text-xs text-vention-muted font-mono">
-        STATUS: OPEN TO WORK // READY
+        <span class="inline-flex items-center gap-2">
+            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
+            STATUS: OPEN TO WORK // READY
+        </span>
     </div>
+
+    <script>
+        // Typing Animation
+        const typingText = "FINANCE\nMEETS\nDATA SCIENCE.";
+        const typingElement = document.getElementById('typing-text');
+        let charIndex = 0;
+        
+        function typeText() {
+            if (charIndex < typingText.length) {
+                const char = typingText[charIndex];
+                if (char === '\n') {
+                    typingElement.innerHTML += '<br>';
+                } else {
+                    typingElement.innerHTML += char;
+                }
+                charIndex++;
+                setTimeout(typeText, 50);
+            }
+        }
+        
+        setTimeout(typeText, 500);
+
+        // Live Clock
+        function updateClock() {
+            const now = new Date();
+            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
+            document.getElementById('live-clock').textContent = now.toLocaleTimeString('en-US', options) + ' IST';
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Counter Animation
+        const counterContainers = document.querySelectorAll('.counter-container');
+        const counterObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const counter = entry.target.querySelector('.counter');
+                    const target = parseInt(entry.target.dataset.target);
+                    animateCounter(counter, target);
+                    counterObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        counterContainers.forEach(container => counterObserver.observe(container));
+
+        function animateCounter(element, target) {
+            let current = 0;
+            const increment = target / 50;
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target;
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current);
+                }
+            }, 30);
+        }
+
+        // Skill Bars Animation
+        const skillBars = document.querySelectorAll('.skill-bar');
+        const skillObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.width = entry.target.dataset.width;
+                    skillObserver.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.5 });
+
+        skillBars.forEach(bar => skillObserver.observe(bar));
+
+        // Floating Particles
+        function createParticle() {
+            const particle = document.createElement('div');
+            particle.className = 'particle';
+            particle.style.left = Math.random() * window.innerWidth + 'px';
+            particle.style.top = Math.random() * window.innerHeight + 'px';
+            particle.style.animation = `particleFloat ${2 + Math.random() * 3}s ease-out forwards`;
+            document.getElementById('particles').appendChild(particle);
+            
+            setTimeout(() => particle.remove(), 5000);
+        }
+
+        setInterval(createParticle, 300);
+
+        // Scroll-based Timeline Animation
+        const timelineProgress = document.querySelector('.timeline-progress');
+        const experienceSection = document.getElementById('experience');
+
+        window.addEventListener('scroll', () => {
+            if (experienceSection) {
+                const rect = experienceSection.getBoundingClientRect();
+                const sectionHeight = experienceSection.offsetHeight;
+                const scrollProgress = Math.min(Math.max((window.innerHeight - rect.top) / sectionHeight, 0), 1);
+                if (timelineProgress) {
+                    timelineProgress.style.height = (scrollProgress * 100) + '%';
+                }
+            }
+        });
+
+        // Smooth reveal animations on scroll
+        const revealElements = document.querySelectorAll('.timeline-item, .project-card, .card-3d');
+        const revealObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, { threshold: 0.1 });
+
+        revealElements.forEach(el => {
+            el.style.opacity = '0';
+            el.style.transform = 'translateY(20px)';
+            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
+            revealObserver.observe(el);
+        });
+
+        // Mouse trail effect on hero section
+        const hero = document.querySelector('header');
+        hero.addEventListener('mousemove', (e) => {
+            const trail = document.createElement('div');
+            trail.style.cssText = `
+                position: absolute;
+                width: 8px;
+                height: 8px;
+                background: rgba(59, 130, 246, 0.3);
+                border-radius: 50%;
+                pointer-events: none;
+                left: ${e.clientX - hero.getBoundingClientRect().left}px;
+                top: ${e.clientY - hero.getBoundingClientRect().top}px;
+                animation: particleFloat 1s ease-out forwards;
+            `;
+            hero.appendChild(trail);
+            setTimeout(() => trail.remove(), 1000);
+        });
+    </script>
 
 </body>
 </html>
