@@ -1,702 +1,396 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ashutosh Kumar | Finance & Data Analyst | Open to Join Immediately</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Ashutosh Kumar — Finance & Data Analytics Portfolio</title>
+    <meta name="description" content="Portfolio of Ashutosh Kumar — Finance Associate specializing in financial modeling, data analytics, and interactive dashboards.">
+    <meta name="theme-color" content="#141413">
+    <meta property="og:title" content="Ashutosh Kumar — Finance & Data Analytics Portfolio">
+    <meta property="og:description" content="Finance Associate specializing in financial modeling, data analytics, and interactive dashboards.">
+    <meta property="og:type" content="website">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Inter', 'sans-serif'],
-                        mono: ['Space Grotesk', 'monospace'],
-                    },
-                    colors: {
-                        'vention-black': '#050505',
-                        'vention-gray': '#1A1A1A',
-                        'vention-line': '#333333',
-                        'vention-accent': '#3B82F6',
-                        'vention-text': '#E5E7EB',
-                        'vention-muted': '#9CA3AF',
-                    },
-                    animation: {
-                        'marquee': 'marquee 30s linear infinite',
-                        'float': 'float 6s ease-in-out infinite',
-                        'pulse-slow': 'pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite',
-                        'draw': 'draw 2s ease-out forwards',
-                    },
-                    keyframes: {
-                        marquee: {
-                            '0%': { transform: 'translateX(0%)' },
-                            '100%': { transform: 'translateX(-100%)' },
-                        },
-                        float: {
-                            '0%, 100%': { transform: 'translateY(0px)' },
-                            '50%': { transform: 'translateY(-20px)' },
-                        },
-                        draw: {
-                            'to': { strokeDashoffset: '0' }
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-        ::-webkit-scrollbar-track {
-            background: #050505; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #333; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #555; 
-        }
-        
-        /* Grid Background */
-        .grid-bg {
-            background-image: linear-gradient(to right, #1a1a1a 1px, transparent 1px),
-                              linear-gradient(to bottom, #1a1a1a 1px, transparent 1px);
-            background-size: 40px 40px;
-        }
-        
-        .hover-inverse:hover {
-            background-color: #E5E7EB;
-            color: #050505;
-        }
-
-        .stock-line {
-            stroke-dasharray: 1000;
-            stroke-dashoffset: 1000;
-            animation: draw 3s ease-out forwards;
-        }
-
-        .counter {
-            display: inline-block;
-        }
-
-        .glow {
-            filter: drop-shadow(0 0 10px rgba(59, 130, 246, 0.5));
-        }
-
-        .card-3d {
-            transform-style: preserve-3d;
-            transition: transform 0.3s ease;
-        }
-
-        .card-3d:hover {
-            transform: perspective(1000px) rotateY(5deg) rotateX(5deg);
-        }
-
-        .particle {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #3B82F6;
-            border-radius: 50%;
-            pointer-events: none;
-            opacity: 0;
-        }
-
-        @keyframes particleFloat {
-            0% { opacity: 1; transform: translateY(0) scale(1); }
-            100% { opacity: 0; transform: translateY(-100px) scale(0); }
-        }
-
-        .skill-bar {
-            transition: width 1.5s ease-out;
-        }
-
-        .typing-cursor {
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 50% { opacity: 1; }
-            51%, 100% { opacity: 0; }
-        }
-    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Source+Serif+4:ital,opsz,wght@0,8..60,300;0,8..60,400;0,8..60,500;0,8..60,600;1,8..60,400;1,8..60,500&family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,400;1,6..72,500&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;1,9..40,400;1,9..40,500&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
 </head>
-<body class="bg-vention-black text-vention-text font-sans selection:bg-vention-accent selection:text-white overflow-x-hidden antialiased">
-
-    <!-- Floating Particles Container -->
-    <div id="particles" class="fixed inset-0 pointer-events-none z-0"></div>
-
-    <!-- Navigation / Top Bar -->
-    <nav class="fixed top-0 w-full z-50 bg-vention-black/95 backdrop-blur-md border-b border-vention-line flex justify-between items-center px-4 md:px-8 h-14 text-xs font-mono uppercase tracking-wider">
-        <div class="flex items-center gap-2">
-            <div class="w-2 h-2 bg-vention-accent rounded-full animate-pulse"></div>
-            <span>Ashutosh Kumar</span>
+<body>
+    <!-- Header -->
+    <header class="site-header" data-theme="light" id="site-header">
+        <div class="page-wrapper header-inner">
+            <a href="#" class="logo-link" aria-label="Home">
+                <span class="logo-text">AK</span>
+                <span class="logo-full">Ashutosh Kumar</span>
+            </a>
+            <nav class="main-nav" id="main-nav">
+                <ul class="nav-list">
+                    <li class="nav-item"><a href="#experience" class="nav-text">Experience</a></li>
+                    <li class="nav-item"><a href="#education" class="nav-text">Education</a></li>
+                    <li class="nav-item"><a href="#skills" class="nav-text">Skills</a></li>
+                    <li class="nav-item"><a href="#projects" class="nav-text">Projects</a></li>
+                    <li class="nav-item"><a href="#certificates" class="nav-text">Certificates</a></li>
+                </ul>
+            </nav>
+            <div class="header-cta-wrapper">
+                <a href="mailto:ashjha785@gmail.com" class="header-cta-button" id="contact-cta">Contact Me</a>
+                <button class="mobile-menu-btn" aria-label="Navigation menu" id="mobile-menu-btn">
+                    <svg width="24" height="24" viewBox="0 0 40 40">
+                        <path d="M18.75 28C19.1641 28.0002 19.5 28.3359 19.5 28.75C19.4999 29.1641 19.164 29.4998 18.75 29.5H7.91699C7.50281 29.5 7.16705 29.1642 7.16699 28.75C7.16699 28.3358 7.50278 28 7.91699 28H18.75ZM32.084 19.25C32.4979 19.2504 32.834 19.586 32.834 20C32.8339 20.4139 32.4979 20.7496 32.084 20.75H7.91699C7.50281 20.75 7.16705 20.4142 7.16699 20C7.16699 19.5858 7.50278 19.25 7.91699 19.25H32.084ZM32.084 10.5C32.4979 10.5004 32.834 10.836 32.834 11.25C32.8339 11.6639 32.4979 11.9996 32.084 12H7.91699C7.50282 12 7.16706 11.6642 7.16699 11.25C7.16699 10.8358 7.50278 10.5 7.91699 10.5H32.084Z" fill="currentColor"></path>
+                    </svg>
+                </button>
+            </div>
         </div>
-        <div class="hidden md:flex gap-8 text-vention-muted items-center">
-            <span>Finance Associate</span>
-            <span>Delhi, IN</span>
-            <!-- Live Clock -->
-            <span id="live-clock" class="text-vention-accent">--:--:--</span>
-        </div>
-        <div class="flex gap-6">
-            <a href="#overview" class="hover:text-vention-accent transition-colors">01. Profile</a>
-            <a href="#experience" class="hover:text-vention-accent transition-colors">02. Exp.</a>
-            <a href="#work" class="hover:text-vention-accent transition-colors">03. Projects</a>
-        </div>
-    </nav>
-
-    <!-- Hero Section -->
-    <header class="relative min-h-screen flex flex-col justify-center items-start pt-20 px-4 md:px-8 border-b border-vention-line grid-bg">
-        <div class="max-w-7xl w-full mx-auto">
-            
-            <!-- Big Decorative Number -->
-            <div class="absolute top-24 right-4 md:right-12 text-[10rem] md:text-[20rem] font-mono font-bold text-vention-gray leading-none select-none -z-10 opacity-50">
-                25
-            </div>
-
-            <!-- Animated Stock Graph Background -->
-            <div class="absolute top-32 right-8 md:right-24 w-64 md:w-96 h-48 opacity-30 pointer-events-none">
-                <svg viewBox="0 0 400 200" class="w-full h-full">
-                    <defs>
-                        <linearGradient id="stockGradient" x1="0%" y1="0%" x2="0%" y2="100%">
-                            <stop offset="0%" style="stop-color:#3B82F6;stop-opacity:0.3" />
-                            <stop offset="100%" style="stop-color:#3B82F6;stop-opacity:0" />
-                        </linearGradient>
-                    </defs>
-                    <path id="stockArea" fill="url(#stockGradient)" d="M0,200 L0,200 L400,200 Z" />
-                    <path id="stockLine" class="stock-line" fill="none" stroke="#3B82F6" stroke-width="2" d="M0,150 Q50,120 100,130 T200,80 T300,100 T400,40" />
-                    <circle class="animate-pulse" cx="400" cy="40" r="4" fill="#3B82F6" />
-                </svg>
-            </div>
-
-            <div class="grid grid-cols-1 md:grid-cols-12 gap-8 mb-16 relative z-10">
-                <div class="col-span-1 md:col-span-8">
-                    <p class="font-mono text-vention-accent mb-4 tracking-widest uppercase text-sm">Professional Portfolio</p>
-                    <h1 class="text-6xl md:text-8xl lg:text-9xl font-mono font-medium tracking-tighter leading-[0.9] mb-8 min-h-[1.8em]">
-                        <span id="typing-text"></span><span class="typing-cursor text-vention-accent">|</span>
-                    </h1>
-                </div>
-                <div class="col-span-1 md:col-span-4 flex flex-col justify-end pb-2">
-                    <p class="text-vention-muted text-lg leading-relaxed max-w-md">
-                        Finance Associate specializing in quantitative modeling, automated forecasting, and interactive BI dashboards. Bridging the gap between raw datasets and strategic capital decisions.
-                    </p>
-                    
-                    <div class="mt-8 flex flex-col sm:flex-row items-start sm:items-center gap-4">
-                        <a href="#work" class="group relative inline-flex h-12 items-center justify-center overflow-hidden rounded-full bg-white px-8 font-medium text-black transition-all duration-300 hover:bg-vention-accent hover:text-white w-40">
-                            <span class="mr-2">View Work</span>
-                            <svg class="w-4 h-4 transform group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
-                        </a>
-                        <a href="https://drive.google.com/file/d/1asp5KbgniOmuv5GSs58H7WjJfnWaeMkS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="group inline-flex h-12 items-center justify-center rounded-full border border-vention-line px-8 font-medium text-white transition-colors hover:bg-white hover:text-black hover:border-white">
-                            Download Resume ↓
-                        </a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Ticker Tape -->
-            <div class="w-full border-t border-vention-line py-4 overflow-hidden absolute bottom-0 left-0 bg-vention-black z-20">
-                <div class="whitespace-nowrap animate-marquee font-mono text-sm text-vention-muted uppercase tracking-widest">
-                    <span class="mx-4 text-vention-accent">Financial Modeling</span> • <span class="mx-4">Google Data Analytics</span> • <span class="mx-4">Tableau</span> • <span class="mx-4">SQL</span> • <span class="mx-4">R Programming</span> • <span class="mx-4">Variance Analysis</span> • <span class="mx-4">Interactive Dashboards</span> • <span class="mx-4">Advanced Excel (VLOOKUP/Index-Match)</span> • <span class="mx-4">Ratio Analysis</span> • <span class="mx-4">Forecasting</span>
-                </div>
-            </div>
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobile-menu">
+            <ul class="mobile-nav-list">
+                <li><a href="#experience" class="mobile-nav-link">Experience</a></li>
+                <li><a href="#education" class="mobile-nav-link">Education</a></li>
+                <li><a href="#skills" class="mobile-nav-link">Skills</a></li>
+                <li><a href="#projects" class="mobile-nav-link">Projects</a></li>
+                <li><a href="#certificates" class="mobile-nav-link">Certificates</a></li>
+                <li><a href="mailto:ashjha785@gmail.com" class="mobile-nav-link cta">Contact Me</a></li>
+            </ul>
         </div>
     </header>
 
-    <!-- 01. Market Overview / About -->
-    <section id="overview" class="border-b border-vention-line bg-vention-black">
-        <div class="max-w-7xl mx-auto">
-            <div class="grid grid-cols-1 md:grid-cols-12 min-h-fit">
-                
-                <!-- Sticky Sidebar -->
-                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit bg-vention-black z-10">
-                    <span class="text-vention-accent font-mono text-xl font-bold block mb-2">01.</span>
-                    <h2 class="text-2xl font-mono font-medium">Core Capabilities</h2>
-                    <p class="text-vention-muted text-sm mt-4">Key performance metrics and technical proficiency.</p>
+    <main id="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section" data-theme="ivory">
+            <div class="page-wrapper" data-style="serif">
+                <div class="hero-text-wrapper">
+                    <h1 class="hero-title serif" id="hero-title">Ashutosh Kumar</h1>
+                    <p class="hero-summary serif" id="hero-summary">Finance Associate & Data Analyst based in Delhi. Specializing in financial modeling, interactive dashboards, and data-driven decision making — transforming complex datasets into actionable insights.</p>
+                    <div class="hero-badges">
+                        <span class="hero-badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg>
+                            Delhi, India
+                        </span>
+                        <span class="hero-badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
+                            ashjha785@gmail.com
+                        </span>
+                        <span class="hero-badge">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg>
+                            +91 7717742551
+                        </span>
+                    </div>
                 </div>
+            </div>
+        </section>
 
-                <!-- Content -->
-                <div class="col-span-1 md:col-span-9">
-                    <!-- Abstract -->
-                    <div class="p-6 md:p-12 border-b border-vention-line">
-                        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
-                            <div class="counter-container" data-target="250">
-                                <span class="block text-4xl font-mono text-vention-accent mb-1"><span class="counter">0</span>+</span>
-                                <span class="text-xs uppercase tracking-wider text-vention-muted">Financial Models</span>
-                            </div>
-                            <div class="counter-container" data-target="95">
-                                <span class="block text-4xl font-mono text-vention-accent mb-1"><span class="counter">0</span>%</span>
-                                <span class="text-xs uppercase tracking-wider text-vention-muted">Data Precision</span>
-                            </div>
-                            <div class="counter-container" data-target="20">
-                                <span class="block text-4xl font-mono text-vention-accent mb-1"><span class="counter">0</span>+</span>
-                                <span class="text-xs uppercase tracking-wider text-vention-muted">Dashboards</span>
-                            </div>
-                            <div>
-                                <span class="block text-4xl font-mono text-vention-accent mb-1">8.1</span>
-                                <span class="text-xs uppercase tracking-wider text-vention-muted">GPA (BBA)</span>
-                            </div>
+        <!-- Featured Banner Section (like Anthropic's "Featured courses" banner) -->
+        <section class="featured-section" data-theme="ivory" id="experience">
+            <div class="page-wrapper" data-style="serif">
+                <div class="package-banner bg-oat">
+                    <div class="banner-announcement">
+                        <div class="banner-text-wrapper">
+                            <p class="banner-title serif">Professional Experience</p>
+                            <p class="banner-description serif">Finance Associate Trainee at Invact Metaversity — building financial models, interactive dashboards, and delivering data-driven insights with precision.</p>
+                        </div>
+                        <div class="banner-metadata">
+                            <a href="https://www.linkedin.com/in/ashut0shkumar" class="btn-secondary" target="_blank" rel="noopener noreferrer">
+                                <span>View LinkedIn</span>
+                            </a>
                         </div>
                     </div>
-
-                    <!-- Skills Progress Bars -->
-                    <div class="p-6 md:p-12 border-b border-vention-line">
-                        <h3 class="font-mono text-lg mb-6">Technical Proficiency</h3>
-                        <div class="space-y-4">
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm text-vention-muted">Excel / Financial Modeling</span>
+                    <div class="banner-packages">
+                        <div class="package-link">
+                            <div class="package-card">
+                                <div class="package-text">
+                                    <p class="package-label">Key Achievement</p>
+                                    <p class="package-summary">250+ Financial Models</p>
+                                    <p class="package-detail">Applied capital, loan structures, fixed assets, depreciation concepts with ratio analyses and forecasting techniques</p>
                                 </div>
-                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
-                                    <div class="skill-bar h-full bg-gradient-to-r from-vention-accent to-blue-400 rounded-full" style="width: 0%" data-width="95%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm text-vention-muted">SQL & Database Management</span>
-                                </div>
-                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
-                                    <div class="skill-bar h-full bg-gradient-to-r from-purple-500 to-purple-400 rounded-full" style="width: 0%" data-width="88%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm text-vention-muted">Tableau & Data Visualization</span>
-                                </div>
-                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
-                                    <div class="skill-bar h-full bg-gradient-to-r from-green-500 to-green-400 rounded-full" style="width: 0%" data-width="90%"></div>
-                                </div>
-                            </div>
-                            <div class="skill-item">
-                                <div class="flex justify-between mb-1">
-                                    <span class="text-sm text-vention-muted">Python</span>
-                                </div>
-                                <div class="h-2 bg-vention-gray rounded-full overflow-hidden">
-                                    <div class="skill-bar h-full bg-gradient-to-r from-orange-500 to-orange-400 rounded-full" style="width: 0%" data-width="75%"></div>
+                                <div class="package-arrow">
+                                    <svg width="30" height="30" viewBox="0 0 21 21"><path d="M4.14585 9.87492L14.4584 9.87492L9.60419 5.04158L10.5 4.14575L16.8542 10.4999L10.5 16.8541L9.60419 15.9583L14.4584 11.1249L4.14585 11.1249L4.14585 9.87492Z" fill="currentColor"></path></svg>
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Tech Stack Grid -->
-                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
-                        <!-- Item 1 -->
-                        <div class="p-8 border-b sm:border-r border-vention-line hover:bg-vention-gray transition-colors group card-3d">
-                            <div class="w-10 h-10 mb-4 rounded-full border border-vention-line flex items-center justify-center text-vention-muted group-hover:border-vention-accent group-hover:text-vention-accent transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z"></path></svg>
+                        <div class="package-link">
+                            <div class="package-card">
+                                <div class="package-text">
+                                    <p class="package-label">Key Achievement</p>
+                                    <p class="package-summary">20+ Interactive Dashboards</p>
+                                    <p class="package-detail">Developed using pivot tables to analyze and present company data, enhancing data-driven decision-making</p>
+                                </div>
+                                <div class="package-arrow">
+                                    <svg width="30" height="30" viewBox="0 0 21 21"><path d="M4.14585 9.87492L14.4584 9.87492L9.60419 5.04158L10.5 4.14575L16.8542 10.4999L10.5 16.8541L9.60419 15.9583L14.4584 11.1249L4.14585 11.1249L4.14585 9.87492Z" fill="currentColor"></path></svg>
+                                </div>
                             </div>
-                            <h4 class="font-mono text-lg mb-2">Financial Analysis</h4>
-                            <p class="text-vention-muted text-sm">Ratio Analysis, Loan Structures, Fixed Assets, Depreciation, Capital Forecasting.</p>
                         </div>
-                        
-                        <!-- Item 2 -->
-                        <div class="p-8 border-b lg:border-r border-vention-line hover:bg-vention-gray transition-colors group card-3d">
-                             <div class="w-10 h-10 mb-4 rounded-full border border-vention-line flex items-center justify-center text-vention-muted group-hover:border-vention-accent group-hover:text-vention-accent transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 7v10c0 2.21 3.582 4 8 4s8-1.79 8-4V7M4 7c0 2.21 3.582 4 8 4s8-1.79 8-4M4 7c0-2.21 3.582-4 8-4s8 1.79 8 4m0 5c0 2.21-3.582 4-8 4s-8-1.79-8-4"></path></svg>
+                        <div class="package-link">
+                            <div class="package-card">
+                                <div class="package-text">
+                                    <p class="package-label">Key Achievement</p>
+                                    <p class="package-summary">95%+ Data Precision</p>
+                                    <p class="package-detail">Employed advanced data cleaning functions, significantly improving data accuracy and reliability for analysis</p>
+                                </div>
+                                <div class="package-arrow">
+                                    <svg width="30" height="30" viewBox="0 0 21 21"><path d="M4.14585 9.87492L14.4584 9.87492L9.60419 5.04158L10.5 4.14575L16.8542 10.4999L10.5 16.8541L9.60419 15.9583L14.4584 11.1249L4.14585 11.1249L4.14585 9.87492Z" fill="currentColor"></path></svg>
+                                </div>
                             </div>
-                            <h4 class="font-mono text-lg mb-2">Data Engineering</h4>
-                            <p class="text-vention-muted text-sm">SQL, R Programming, Advanced Cleaning Algorithms, Dataset Optimization.</p>
-                        </div>
-
-                        <!-- Item 3 -->
-                        <div class="p-8 border-b border-vention-line hover:bg-vention-gray transition-colors group card-3d">
-                             <div class="w-10 h-10 mb-4 rounded-full border border-vention-line flex items-center justify-center text-vention-muted group-hover:border-vention-accent group-hover:text-vention-accent transition-colors">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M11 3.055A9.001 9.001 0 1020.945 13H11V3.055z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M20.488 9H15V3.512A9.025 9.025 0 0120.488 9z"></path></svg>
-                            </div>
-                            <h4 class="font-mono text-lg mb-2">Visualization</h4>
-                            <p class="text-vention-muted text-sm">Tableau, Pivot Charts, Interactive Executive Dashboards, Trend Reporting.</p>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <!-- 02. Professional Experience (Timeline) -->
-    <section id="experience" class="border-b border-vention-line bg-vention-black">
-        <div class="max-w-7xl mx-auto">
-             <div class="grid grid-cols-1 md:grid-cols-12 min-h-fit">
-                
-                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit bg-vention-black z-10">
-                    <span class="text-vention-accent font-mono text-xl font-bold block mb-2">02.</span>
-                    <h2 class="text-2xl font-mono font-medium">Timeline</h2>
-                    <p class="text-vention-muted text-sm mt-4">Professional history and academic credentials.</p>
-                    
-                    <!-- Animated Timeline Indicator -->
-                    <div class="mt-8 relative hidden md:block">
-                        <div class="absolute left-2 top-0 bottom-0 w-0.5 bg-vention-line"></div>
-                        <div class="absolute left-2 top-0 w-0.5 bg-vention-accent timeline-progress" style="height: 0%"></div>
-                        <div class="space-y-4 pl-8">
-                            <div class="relative">
-                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-accent"></div>
-                                <span class="text-xs text-vention-muted">Present</span>
+        <!-- Three Section Cards (like Anthropic's "Build with Claude" / "Claude for work" / "Claude for personal") -->
+        <div class="page-wrapper section-cards-wrapper" id="skills-cards">
+            <div class="section-card bg-cactus" data-theme="ivory" id="education">
+                <div class="section-card-inner">
+                    <div class="section-content-cta">
+                        <div class="section-content-wrapper">
+                            <h2 class="section-card-title serif">Education</h2>
+                            <p class="section-card-body serif">BBA (General) from Maharaja Surajmal Institute, GGSIPU — 8.1 GPA with specializations in Investment Management, Quantitative Techniques & Financial Accounting</p>
+                            <p class="section-card-meta">Aug 2018 – Jul 2021 | Delhi</p>
+                        </div>
+                        <a href="#" class="btn-secondary" onclick="return false;">
+                            <span>Details</span>
+                        </a>
+                    </div>
+                    <div class="section-illustration">
+                        <svg viewBox="0 0 160 160" width="160" height="160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="80" cy="80" r="70" stroke="currentColor" stroke-width="1.5" opacity="0.3"/>
+                            <path d="M80 30L120 55V105L80 130L40 105V55L80 30Z" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+                            <circle cx="80" cy="75" r="20" stroke="currentColor" stroke-width="1.5" fill="none"/>
+                            <path d="M70 75L77 82L92 67" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            <line x1="80" y1="95" x2="80" y2="120" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+                            <circle cx="80" cy="124" r="4" fill="currentColor" opacity="0.3"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card bg-heather" data-theme="ivory" id="skills">
+                <div class="section-card-inner">
+                    <div class="section-content-cta">
+                        <div class="section-content-wrapper">
+                            <h2 class="section-card-title serif">Technical Skills</h2>
+                            <p class="section-card-body serif">Advanced Excel & Google Sheets — VLOOKUP, Nested IF, Index-Match, Pivot Tables & Charts. Financial Modelling, Statement Analysis, Ratio Analysis & Forecasting</p>
+                        </div>
+                        <a href="#" class="btn-secondary" onclick="return false;">
+                            <span>Explore</span>
+                        </a>
+                    </div>
+                    <div class="section-illustration">
+                        <svg viewBox="0 0 160 160" width="160" height="160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <rect x="30" y="40" width="100" height="80" rx="8" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+                            <line x1="30" y1="60" x2="130" y2="60" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                            <line x1="65" y1="40" x2="65" y2="120" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                            <line x1="100" y1="40" x2="100" y2="120" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                            <rect x="40" y="68" width="18" height="35" rx="2" fill="currentColor" opacity="0.15"/>
+                            <rect x="73" y="78" width="18" height="25" rx="2" fill="currentColor" opacity="0.2"/>
+                            <rect x="107" y="58" width="18" height="45" rx="2" fill="currentColor" opacity="0.25"/>
+                            <circle cx="49" cy="50" r="5" stroke="currentColor" stroke-width="1.5" fill="none" opacity="0.5"/>
+                            <path d="M46 50L48 52L52 48" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.5"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card bg-sky" data-theme="ivory" id="certificates">
+                <div class="section-card-inner">
+                    <div class="section-content-cta">
+                        <div class="section-content-wrapper">
+                            <h2 class="section-card-title serif">Certifications</h2>
+                            <p class="section-card-body serif">Google Data Analysis: Foundations (Coursera) — Mastered data cleaning, analysis, visualization skills and tools including spreadsheets, SQL, R programming & Tableau</p>
+                        </div>
+                        <a href="#" class="btn-secondary" onclick="return false;">
+                            <span>View All</span>
+                        </a>
+                    </div>
+                    <div class="section-illustration">
+                        <svg viewBox="0 0 160 160" width="160" height="160" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="80" cy="65" r="30" stroke="currentColor" stroke-width="1.5" opacity="0.4"/>
+                            <path d="M65 65L75 75L95 55" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" opacity="0.6"/>
+                            <path d="M65 95L80 130L95 95" stroke="currentColor" stroke-width="1.5" opacity="0.3" fill="none"/>
+                            <line x1="73" y1="110" x2="87" y2="110" stroke="currentColor" stroke-width="1" opacity="0.2"/>
+                            <circle cx="50" cy="45" r="3" fill="currentColor" opacity="0.15"/>
+                            <circle cx="110" cy="45" r="3" fill="currentColor" opacity="0.15"/>
+                            <circle cx="80" cy="25" r="3" fill="currentColor" opacity="0.15"/>
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Projects Section (like newsletter but styled as project showcase) -->
+        <section class="projects-section" id="projects">
+            <div class="page-wrapper">
+                <div class="projects-wrapper">
+                    <div class="projects-header">
+                        <h2 class="projects-title serif" id="projects-title">Projects Portfolio</h2>
+                        <p class="projects-subtitle serif">Oct 2023 – Present. A collection of financial analysis, data visualization, and automation projects.</p>
+                    </div>
+                    <div class="projects-grid">
+                        <div class="project-card" id="project-1">
+                            <div class="project-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>
                             </div>
-                            <div class="relative">
-                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-line"></div>
-                                <span class="text-xs text-vention-muted">2023</span>
+                            <h3 class="project-name">Financial Models</h3>
+                            <p class="project-desc">Developed complex financial models for in-depth analysis and accurate forecasting of business outcomes</p>
+                        </div>
+                        <div class="project-card" id="project-2">
+                            <div class="project-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
                             </div>
-                            <div class="relative">
-                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-line"></div>
-                                <span class="text-xs text-vention-muted">2021</span>
+                            <h3 class="project-name">Interactive Dashboards</h3>
+                            <p class="project-desc">Created interactive dashboards for real-time data visualization, empowering instant decision-making</p>
+                        </div>
+                        <div class="project-card" id="project-3">
+                            <div class="project-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"></polyline></svg>
                             </div>
-                            <div class="relative">
-                                <div class="absolute -left-6 w-3 h-3 rounded-full bg-vention-line"></div>
-                                <span class="text-xs text-vention-muted">2018</span>
+                            <h3 class="project-name">Advanced Excel Functions</h3>
+                            <p class="project-desc">Utilized advanced Excel functions for comprehensive data analysis and workflow automation</p>
+                        </div>
+                        <div class="project-card" id="project-4">
+                            <div class="project-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"></path><path d="M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z"></path></svg>
                             </div>
+                            <h3 class="project-name">Data Cleaning</h3>
+                            <p class="project-desc">Performed comprehensive data cleaning to ensure accuracy, consistency, and reliability across datasets</p>
+                        </div>
+                        <div class="project-card" id="project-5">
+                            <div class="project-icon">
+                                <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
+                            </div>
+                            <h3 class="project-name">Excel Reports & Charts</h3>
+                            <p class="project-desc">Generated detailed reports using pivot tables and charts for actionable business insights</p>
                         </div>
                     </div>
                 </div>
+            </div>
+        </section>
 
-                <div class="col-span-1 md:col-span-9">
-                    <!-- Exp 1 -->
-                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors timeline-item">
-                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
-                            <div>
-                                <h3 class="text-2xl font-mono font-medium text-white">Finance Associate Trainee</h3>
-                                <p class="text-vention-accent font-mono text-sm mt-1">Invact Metaversity</p>
-                            </div>
-                            <span class="text-vention-muted font-mono text-xs border border-vention-line px-2 py-1 rounded mt-2 md:mt-0 flex items-center gap-2">
-                                <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-                                2023 - Present
-                            </span>
+        <!-- Contact / Newsletter Section -->
+        <section class="newsletter-section" id="contact">
+            <div class="page-wrapper">
+                <div class="newsletter-wrapper">
+                    <div class="newsletter-content">
+                        <div class="newsletter-text">
+                            <h2 class="newsletter-title">Get in Touch</h2>
+                            <p class="newsletter-body serif">Interested in connecting? Reach out via email or find me on LinkedIn. Open to opportunities in finance, data analytics, and business intelligence.</p>
                         </div>
-                        <ul class="text-vention-muted text-sm list-disc list-inside space-y-2 max-w-2xl">
-                            <li>Created 250+ financial models covering capital, loan structures, fixed assets, and depreciation.</li>
-                            <li>Implemented 20+ interactive dashboards using pivot tables to enhance decision-making.</li>
-                            <li>Achieved 95% data precision through advanced cleaning functions in Excel/Sheets.</li>
+                        <div class="newsletter-form-container">
+                            <form class="newsletter-form" onsubmit="handleContact(event)">
+                                <div class="input-wrapper">
+                                    <input type="email" aria-label="Your email address" placeholder="Your email address" class="email-input" required name="email" id="contact-email">
+                                    <button type="submit" class="submit-button" aria-label="Send" id="contact-submit">
+                                        <svg width="20" height="20" viewBox="0 0 21 21"><path d="M4.14585 9.87492L14.4584 9.87492L9.60419 5.04158L10.5 4.14575L16.8542 10.4999L10.5 16.8541L9.60419 15.9583L14.4584 11.1249L4.14585 11.1249L4.14585 9.87492Z" fill="currentColor"></path></svg>
+                                    </button>
+                                </div>
+                                <p class="newsletter-disclaimer">Drop your email and I'll get back to you. Or reach out directly at ashjha785@gmail.com</p>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="site-footer" id="footer" role="contentinfo" aria-label="Site footer">
+        <div class="page-wrapper footer-inner">
+            <div class="footer-logo-wrapper">
+                <a href="#" aria-label="Back to top">
+                    <span class="footer-logo">AK</span>
+                </a>
+            </div>
+            <nav class="footer-links" aria-label="Footer navigation">
+                <div class="footer-column">
+                    <div class="footer-list-section">
+                        <h3 class="footer-heading">Profile</h3>
+                        <ul class="footer-list">
+                            <li><a href="#" class="footer-link">About</a></li>
+                            <li><a href="#experience" class="footer-link">Experience</a></li>
+                            <li><a href="#education" class="footer-link">Education</a></li>
+                            <li><a href="#skills" class="footer-link">Skills</a></li>
                         </ul>
                     </div>
-
-                    <!-- Edu 1 -->
-                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors timeline-item">
-                        <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
-                            <div>
-                                <h3 class="text-xl font-mono font-medium text-white">Google Data Analytics Certification</h3>
-                                <p class="text-vention-accent font-mono text-sm mt-1">Coursera / Google</p>
-                            </div>
-                            <span class="text-vention-muted font-mono text-xs border border-vention-line px-2 py-1 rounded mt-2 md:mt-0 flex items-center gap-2">
-                                <svg class="w-4 h-4 text-green-400" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"></path></svg>
-                                Certified
-                            </span>
-                        </div>
-                        <p class="text-vention-muted text-sm max-w-2xl">
-                            Comprehensive training in data cleaning, SQL, R programming, and Tableau visualization. Focused on handling large financial datasets.
-                        </p>
-                    </div>
-
-                    <!-- Edu 2 -->
-                    <div class="group block border-b border-vention-line p-6 md:p-8 hover:bg-vention-gray transition-colors timeline-item">
-                         <div class="flex flex-col md:flex-row justify-between md:items-center mb-4">
-                            <div>
-                                <h3 class="text-xl font-mono font-medium text-white">BBA (General)</h3>
-                                <p class="text-vention-accent font-mono text-sm mt-1">Maharaja Surajmal Institute, GGSIPU</p>
-                            </div>
-                            <span class="text-vention-muted font-mono text-xs border border-vention-line px-2 py-1 rounded mt-2 md:mt-0">2018 - 2021</span>
-                        </div>
-                        <p class="text-vention-muted text-sm max-w-2xl">
-                            <span class="text-white">Grade: 8.1 GPA</span>. Specialization in Investment Management, Quantitative Techniques, and Financial Accounting.
-                        </p>
+                    <div class="footer-list-section">
+                        <h3 class="footer-heading">Expertise</h3>
+                        <ul class="footer-list">
+                            <li><span class="footer-link">Financial Modelling</span></li>
+                            <li><span class="footer-link">Data Analysis</span></li>
+                            <li><span class="footer-link">Dashboard Design</span></li>
+                            <li><span class="footer-link">Forecasting</span></li>
+                        </ul>
                     </div>
                 </div>
+                <div class="footer-column">
+                    <div class="footer-list-section">
+                        <h3 class="footer-heading">Tools</h3>
+                        <ul class="footer-list">
+                            <li><span class="footer-link">Advanced Excel</span></li>
+                            <li><span class="footer-link">Google Sheets</span></li>
+                            <li><span class="footer-link">SQL</span></li>
+                            <li><span class="footer-link">R Programming</span></li>
+                            <li><span class="footer-link">Tableau</span></li>
+                            <li><span class="footer-link">Pivot Tables</span></li>
+                        </ul>
+                    </div>
+                    <div class="footer-list-section">
+                        <h3 class="footer-heading">Languages</h3>
+                        <ul class="footer-list">
+                            <li><span class="footer-link">English</span></li>
+                            <li><span class="footer-link">Hindi</span></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-list-section">
+                        <h3 class="footer-heading">Projects</h3>
+                        <ul class="footer-list">
+                            <li><a href="#projects" class="footer-link">Financial Models</a></li>
+                            <li><a href="#projects" class="footer-link">Interactive Dashboards</a></li>
+                            <li><a href="#projects" class="footer-link">Advanced Excel Functions</a></li>
+                            <li><a href="#projects" class="footer-link">Data Cleaning</a></li>
+                            <li><a href="#projects" class="footer-link">Excel Reports</a></li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="footer-column">
+                    <div class="footer-list-section">
+                        <h3 class="footer-heading">Contact</h3>
+                        <ul class="footer-list">
+                            <li><a href="mailto:ashjha785@gmail.com" class="footer-link">Email</a></li>
+                            <li><a href="https://www.linkedin.com/in/ashut0shkumar" class="footer-link" target="_blank" rel="noopener noreferrer">LinkedIn</a></li>
+                            <li><a href="tel:+917717742551" class="footer-link">Phone</a></li>
+                        </ul>
+                    </div>
+                    <div class="footer-list-section">
+                        <h3 class="footer-heading">Location</h3>
+                        <ul class="footer-list">
+                            <li><span class="footer-link">Delhi, India</span></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="footer-bottom">
+                <small class="footer-copyright" role="contentinfo">© 2026 Ashutosh Kumar</small>
+                <ul class="footer-social" role="navigation" aria-label="Social media links">
+                    <li>
+                        <a href="https://www.linkedin.com/in/ashut0shkumar" aria-label="Visit LinkedIn profile" target="_blank" rel="noopener noreferrer">
+                            <svg width="24" height="24" viewBox="0 0 32 32"><path d="M25.8182 4H6.18182C4.97636 4 4 4.97636 4 6.18182V25.8182C4 27.0236 4.97636 28 6.18182 28H25.8182C27.0236 28 28 27.0236 28 25.8182V6.18182C28 4.97636 27.0236 4 25.8182 4ZM11.5862 23.6364H8.368V13.2815H11.5862V23.6364ZM9.94436 11.8011C8.90691 11.8011 8.068 10.96 8.068 9.92473C8.068 8.88945 8.908 8.04945 9.94436 8.04945C10.9785 8.04945 11.8196 8.89055 11.8196 9.92473C11.8196 10.96 10.9785 11.8011 9.94436 11.8011ZM23.6407 23.6364H20.4247V18.6007C20.4247 17.3996 20.4029 15.8549 18.7524 15.8549C17.0778 15.8549 16.8204 17.1629 16.8204 18.5135V23.6364H13.6044V13.2815H16.6916V14.6964H16.7353C17.1651 13.8825 18.2145 13.024 19.78 13.024C23.0385 13.024 23.6407 15.1687 23.6407 17.9571V23.6364Z" fill="#b0aea5"></path></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mailto:ashjha785@gmail.com" aria-label="Send email">
+                            <svg width="24" height="24" viewBox="0 0 32 32"><path d="M28 6H4C3.45 6 3 6.45 3 7V25C3 25.55 3.45 26 4 26H28C28.55 26 29 25.55 29 25V7C29 6.45 28.55 6 28 6ZM26.59 8L16 15.78L5.41 8H26.59ZM5 24V9.28L16 17.38L27 9.28V24H5Z" fill="#b0aea5"></path></svg>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="tel:+917717742551" aria-label="Call">
+                            <svg width="24" height="24" viewBox="0 0 32 32"><path d="M25.315 20.452l-3.878-1.77a1.5 1.5 0 0 0-1.485.178l-1.907 1.43a12.2 12.2 0 0 1-6.335-6.335l1.43-1.907a1.5 1.5 0 0 0 .178-1.485l-1.77-3.878A1.5 1.5 0 0 0 10.144 5.6l-3.2.8A1.5 1.5 0 0 0 5.8 7.852C6.915 21.48 10.52 25.085 24.148 26.2a1.5 1.5 0 0 0 1.452-1.144l.8-3.2a1.5 1.5 0 0 0-1.085-1.404z" fill="#b0aea5"></path></svg>
+                        </a>
+                    </li>
+                </ul>
             </div>
         </div>
-    </section>
+    </footer>
 
-    <!-- 03. Portfolio Projects -->
-    <section id="work" class="border-b border-vention-line bg-vention-black">
-        <div class="max-w-7xl mx-auto">
-             <div class="grid grid-cols-1 md:grid-cols-12 min-h-fit">
-                
-                <div class="col-span-1 md:col-span-3 border-b md:border-b-0 md:border-r border-vention-line p-6 md:p-10 md:sticky md:top-14 h-fit bg-vention-black z-10">
-                    <span class="text-vention-accent font-mono text-xl font-bold block mb-2">03.</span>
-                    <h2 class="text-2xl font-mono font-medium">Key Projects</h2>
-                    <p class="text-vention-muted text-sm mt-4">Selected works demonstrating modeling and analytics.</p>
-                    
-                    <!-- Project Stats -->
-                    <div class="mt-8 space-y-4">
-                        <div class="flex items-center justify-between p-3 border border-vention-line rounded-lg hover:border-vention-accent transition-colors">
-                            <span class="text-xs text-vention-muted">Total Projects</span>
-                            <span class="text-lg font-mono text-vention-accent">12</span>
-                        </div>
-                        <div class="flex items-center justify-between p-3 border border-vention-line rounded-lg hover:border-vention-accent transition-colors">
-                            <span class="text-xs text-vention-muted">Success Rate</span>
-                            <span class="text-lg font-mono text-green-400">98%</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="col-span-1 md:col-span-9">
-                    
-                    <!-- Header Row -->
-                    <div class="hidden md:grid grid-cols-12 px-8 py-4 border-b border-vention-line text-xs uppercase tracking-widest text-vention-muted font-mono">
-                        <div class="col-span-6">Project Name</div>
-                        <div class="col-span-4">Category</div>
-                        <div class="col-span-2 text-right">Tools</div>
-                    </div>
-
-                    <!-- Project 1 -->
-                    <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300 project-card">
-                        <div class="grid grid-cols-1 md:grid-cols-12 p-6 md:px-8 md:py-8 items-center gap-4 md:gap-0">
-                            <div class="col-span-6">
-                                <h3 class="text-2xl md:text-3xl font-mono font-medium group-hover:translate-x-2 transition-transform">Corporate Valuation Model</h3>
-                                <p class="md:hidden text-sm text-vention-muted mt-1">Forecasting & Analysis</p>
-                            </div>
-                            <div class="col-span-4 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-purple-500 animate-pulse"></span>
-                                <span class="text-sm font-mono">Financial Modeling</span>
-                            </div>
-                            <div class="col-span-2 text-right font-mono text-sm text-vention-muted group-hover:text-black">Excel / VLOOKUP</div>
-                        </div>
-                        <div class="px-8 pb-6 text-sm text-gray-500 max-w-2xl hidden md:block opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto transition-all duration-300">
-                            Developed complex financial models for forecasting using historical data. Applied ratio analysis to determine company health.
-                        </div>
-                    </a>
-
-                    <!-- Project 2 -->
-                    <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300 project-card">
-                        <div class="grid grid-cols-1 md:grid-cols-12 p-6 md:px-8 md:py-8 items-center gap-4 md:gap-0">
-                            <div class="col-span-6">
-                                <h3 class="text-2xl md:text-3xl font-mono font-medium group-hover:translate-x-2 transition-transform">Real-time Sales Dashboard</h3>
-                                <p class="md:hidden text-sm text-vention-muted mt-1">Interactive Reporting</p>
-                            </div>
-                            <div class="col-span-4 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                                <span class="text-sm font-mono">Analytics</span>
-                            </div>
-                            <div class="col-span-2 text-right font-mono text-sm text-vention-muted group-hover:text-black">Pivot Charts / Tableau</div>
-                        </div>
-                        <div class="px-8 pb-6 text-sm text-gray-500 max-w-2xl hidden md:block opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto transition-all duration-300">
-                            Created interactive dashboards for real-time visualization of sales KPIs, enabling faster strategic adjustments.
-                        </div>
-                    </a>
-
-                     <!-- Project 3 -->
-                     <a href="#" class="group block border-b border-vention-line hover-inverse transition-all duration-300 project-card">
-                        <div class="grid grid-cols-1 md:grid-cols-12 p-6 md:px-8 md:py-8 items-center gap-4 md:gap-0">
-                            <div class="col-span-6">
-                                <h3 class="text-2xl md:text-3xl font-mono font-medium group-hover:translate-x-2 transition-transform">Dataset Optimization Engine</h3>
-                                <p class="md:hidden text-sm text-vention-muted mt-1">Data Engineering</p>
-                            </div>
-                            <div class="col-span-4 flex items-center gap-2">
-                                <span class="w-2 h-2 rounded-full bg-blue-500 animate-pulse"></span>
-                                <span class="text-sm font-mono">Automation</span>
-                            </div>
-                            <div class="col-span-2 text-right font-mono text-sm text-vention-muted group-hover:text-black">SQL / Advanced Excel</div>
-                        </div>
-                        <div class="px-8 pb-6 text-sm text-gray-500 max-w-2xl hidden md:block opacity-0 h-0 group-hover:opacity-100 group-hover:h-auto transition-all duration-300">
-                            Built an automated data cleaning workflow that increased analysis reliability by 95%, removing duplicates and standardizing formats.
-                        </div>
-                    </a>
-
-                </div>
-             </div>
-        </div>
-    </section>
-
-    <!-- 04. Connect / Footer -->
-    <section id="contact" class="relative py-20 md:py-32 overflow-hidden">
-        <div class="absolute inset-0 grid-bg opacity-50 pointer-events-none"></div>
-        
-        <!-- Animated Background Orbs -->
-        <div class="absolute top-20 left-20 w-64 h-64 bg-vention-accent/10 rounded-full blur-3xl animate-pulse-slow"></div>
-        <div class="absolute bottom-20 right-20 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse-slow" style="animation-delay: 2s;"></div>
-        
-        <div class="max-w-7xl mx-auto px-4 md:px-8 relative z-10">
-            
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-16">
-                <div>
-                    <span class="text-vention-accent font-mono text-xl font-bold block mb-4">04. Contact</span>
-                    <h2 class="text-5xl md:text-7xl font-mono font-medium tracking-tighter mb-8">READY TO<br>ANALYZE.</h2>
-                    <p class="text-vention-muted text-lg max-w-md mb-10">
-                        Available for Finance Analyst, Data Analyst, and Business Intelligence roles.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4">
-                         <a href="mailto:ashjha785@gmail.com" class="inline-flex h-14 items-center justify-center rounded-full bg-vention-accent px-10 font-medium text-white transition-all hover:scale-105 hover:shadow-lg hover:shadow-vention-accent/30">
-                            ashjha785@gmail.com
-                        </a>
-                        <a href="tel:7717742551" class="inline-flex h-14 items-center justify-center rounded-full border border-vention-line px-10 font-medium text-white transition-colors hover:bg-white hover:text-black">
-                            +91 7717742551
-                        </a>
-                    </div>
-                </div>
-
-                <div class="flex flex-col justify-end md:items-end">
-                    <div class="grid grid-cols-2 gap-12 text-sm font-mono">
-                        <div>
-                            <h4 class="text-vention-muted uppercase tracking-widest mb-4">Socials</h4>
-                            <ul class="space-y-2">
-                                <li><a href="https://www.linkedin.com/in/ashut0shkumar" target="_blank" class="hover:text-vention-accent transition-colors inline-flex items-center gap-2 group">LinkedIn <span class="group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform">↗</span></a></li>
-                                <li><a href="https://drive.google.com/file/d/1asp5KbgniOmuv5GSs58H7WjJfnWaeMkS/view?usp=drive_link" target="_blank" rel="noopener noreferrer" class="hover:text-vention-accent transition-colors inline-flex items-center gap-2 group">Download Resume <span class="group-hover:translate-y-1 transition-transform">⬇</span></a></li>
-                            </ul>
-                        </div>
-                        <div>
-                             <h4 class="text-vention-muted uppercase tracking-widest mb-4">Location</h4>
-                            <ul class="space-y-2">
-                                <li>Delhi, India</li>
-                                <li>Open to Remote</li>
-                                <li class="text-vention-muted pt-4">© 2025 Ashutosh Kumar</li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Mobile Visual Detail -->
-    <div class="md:hidden border-t border-vention-line py-6 text-center text-xs text-vention-muted font-mono">
-        <span class="inline-flex items-center gap-2">
-            <span class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></span>
-            STATUS: OPEN TO WORK // READY
-        </span>
-    </div>
-
-    <script>
-        // Typing Animation
-        const typingText = "FINANCE\nMEETS\nDATA SCIENCE.";
-        const typingElement = document.getElementById('typing-text');
-        let charIndex = 0;
-        
-        function typeText() {
-            if (charIndex < typingText.length) {
-                const char = typingText[charIndex];
-                if (char === '\n') {
-                    typingElement.innerHTML += '<br>';
-                } else {
-                    typingElement.innerHTML += char;
-                }
-                charIndex++;
-                setTimeout(typeText, 50);
-            }
-        }
-        
-        setTimeout(typeText, 500);
-
-        // Live Clock
-        function updateClock() {
-            const now = new Date();
-            const options = { hour: '2-digit', minute: '2-digit', second: '2-digit', hour12: false };
-            document.getElementById('live-clock').textContent = now.toLocaleTimeString('en-US', options) + ' IST';
-        }
-        setInterval(updateClock, 1000);
-        updateClock();
-
-        // Counter Animation
-        const counterContainers = document.querySelectorAll('.counter-container');
-        const counterObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    const counter = entry.target.querySelector('.counter');
-                    const target = parseInt(entry.target.dataset.target);
-                    animateCounter(counter, target);
-                    counterObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        counterContainers.forEach(container => counterObserver.observe(container));
-
-        function animateCounter(element, target) {
-            let current = 0;
-            const increment = target / 50;
-            const timer = setInterval(() => {
-                current += increment;
-                if (current >= target) {
-                    element.textContent = target;
-                    clearInterval(timer);
-                } else {
-                    element.textContent = Math.floor(current);
-                }
-            }, 30);
-        }
-
-        // Skill Bars Animation
-        const skillBars = document.querySelectorAll('.skill-bar');
-        const skillObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.width = entry.target.dataset.width;
-                    skillObserver.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.5 });
-
-        skillBars.forEach(bar => skillObserver.observe(bar));
-
-        // Floating Particles
-        function createParticle() {
-            const particle = document.createElement('div');
-            particle.className = 'particle';
-            particle.style.left = Math.random() * window.innerWidth + 'px';
-            particle.style.top = Math.random() * window.innerHeight + 'px';
-            particle.style.animation = `particleFloat ${2 + Math.random() * 3}s ease-out forwards`;
-            document.getElementById('particles').appendChild(particle);
-            
-            setTimeout(() => particle.remove(), 5000);
-        }
-
-        setInterval(createParticle, 300);
-
-        // Scroll-based Timeline Animation
-        const timelineProgress = document.querySelector('.timeline-progress');
-        const experienceSection = document.getElementById('experience');
-
-        window.addEventListener('scroll', () => {
-            if (experienceSection) {
-                const rect = experienceSection.getBoundingClientRect();
-                const sectionHeight = experienceSection.offsetHeight;
-                const scrollProgress = Math.min(Math.max((window.innerHeight - rect.top) / sectionHeight, 0), 1);
-                if (timelineProgress) {
-                    timelineProgress.style.height = (scrollProgress * 100) + '%';
-                }
-            }
-        });
-
-        // Smooth reveal animations on scroll
-        const revealElements = document.querySelectorAll('.timeline-item, .project-card, .card-3d');
-        const revealObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, { threshold: 0.1 });
-
-        revealElements.forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            revealObserver.observe(el);
-        });
-
-        // Mouse trail effect on hero section
-        const hero = document.querySelector('header');
-        hero.addEventListener('mousemove', (e) => {
-            const trail = document.createElement('div');
-            trail.style.cssText = `
-                position: absolute;
-                width: 8px;
-                height: 8px;
-                background: rgba(59, 130, 246, 0.3);
-                border-radius: 50%;
-                pointer-events: none;
-                left: ${e.clientX - hero.getBoundingClientRect().left}px;
-                top: ${e.clientY - hero.getBoundingClientRect().top}px;
-                animation: particleFloat 1s ease-out forwards;
-            `;
-            hero.appendChild(trail);
-            setTimeout(() => trail.remove(), 1000);
-        });
-    </script>
-
+    <script src="index.js"></script>
 </body>
 </html>
